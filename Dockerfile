@@ -7,10 +7,21 @@ RUN set -e \
     && echo ">>>>>>>>>>>>>>> ${version} ###############" \
     && go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest  \
     && xcaddy build ${version} --output /caddy \ 
+        --with github.com/caddy-dns/route53 \
         --with github.com/caddy-dns/cloudflare \
-        --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive \        
+        --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive \
+        --with github.com/caddy-dns/dnspod \
+        --with github.com/mastercactapus/caddy2-proxyprotocol \
+        --with github.com/abiosoft/caddy-exec \
+        --with github.com/greenpau/caddy-trace \
+        --with github.com/hairyhenderson/caddy-teapot-module \
+        --with github.com/kirsch33/realip \
+        --with github.com/porech/caddy-maxmind-geolocation \
+        --with github.com/caddyserver/transform-encoder \
+        --with github.com/caddyserver/replace-response \
         --with github.com/imgk/caddy-trojan \
-        --with github.com/mholt/caddy-webdav 
+        --with github.com/mholt/caddy-l4 \
+        --with github.com/mholt/caddy-webdav
          
 
 FROM alpine:latest AS dist
