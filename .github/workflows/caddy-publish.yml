@@ -43,8 +43,8 @@ jobs:
         uses: docker/login-action@v1 
         with:
           #registry: docker.pkg.github.com
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       - name: Build and push
         uses: docker/build-push-action@v2
@@ -54,7 +54,7 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: |
-              xh116/caddy:latest
-              xh116/caddy:${{ steps.date.outputs.today }}   
+              zjy7723/caddy2:latest
+              zjy7723/caddy2:${{ steps.date.outputs.today }}   
         
        
