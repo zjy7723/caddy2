@@ -9,6 +9,8 @@ name: caddy-CI
 #    branches: [ main
 
 on:
+  schedule:
+    - cron: '0 8 4 * *'
   workflow_dispatch:
     inputs:
       trigger:
