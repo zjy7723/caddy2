@@ -8,8 +8,6 @@ name: Naiveproxy Docker
 #  pull_request:
 #    branches: [ main ]
 on:
-  schedule:
-    - cron: '0 8 3 * *'
   workflow_dispatch:
     inputs:
       trigger:
