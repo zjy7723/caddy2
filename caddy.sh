@@ -270,18 +270,7 @@ function install_caddy() {
 		
 	echo -e "
 {
-	order trojan before route
-	order forward_proxy before trojan
-	admin off
-	log {
-        output file /var/lib/caddy/access.log {
-        roll_size 2MiB
-		roll_keep 3
-		roll_keep_for 7d
-        }
-        level  ERROR
-    }
-	servers :443 {
+	servers {
 		listener_wrappers {
 			trojan 
 		}
@@ -289,6 +278,11 @@ function install_caddy() {
 			allow_h2c 
 			experimental_http3 
 		}
+	}
+	trojan {
+		caddy
+		no_proxy
+		user ${CONF_TROJAN}
 	}
 	cert_issuer acme
 	acme_dns cloudflare ${CONF_API}
@@ -298,26 +292,18 @@ function install_caddy() {
 }
 :443, ${CONF_DOMAIN} {
     tls {
-		ciphers TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
-		alpn h2 http/1.1
+		protocols tls1.2 tls1.3
 	}
-	
-	forward_proxy {
+	route {
+	    forward_proxy {
 		basic_auth ${CONF_USER} ${CONF_PASS} 
 		hide_ip
 		hide_via
 		probe_resistance
-	}
-	
-	trojan {
-		user ${CONF_TROJAN}
-		connect_method
-		websocket
-	}
-	
-	route {
-		header {
-			Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	    }
+		trojan {
+			connect_method
+			websocket
 		}
 		file_server {
 			root /usr/share/caddy
