@@ -270,7 +270,13 @@ function install_caddy() {
 		
 	echo -e "
 {
-	servers {
+        order trojan before map
+	order forward_proxy before trojan
+        admin off
+	log {
+          output discard
+        }
+	servers :443 {
 		listener_wrappers {
 			trojan 
 		}
