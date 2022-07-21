@@ -1,0 +1,9 @@
+FROM alpine:latest
+
+ARG TARGETARCH
+
+COPY tuic-client_${TARGETARCH} /usr/bin/tuic-client
+
+ENTRYPOINT ["/usr/bin/tuic-client"]
+
+CMD ["tuic-client", "--config", "/etc/server.json"]
