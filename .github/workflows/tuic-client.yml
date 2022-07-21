@@ -24,7 +24,8 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/amd64
+        file: ./Dockerfile-tuic-client
+        platforms: linux/ard64
         push: true
         tags: |
           zjy7723/tuic-client:latest
