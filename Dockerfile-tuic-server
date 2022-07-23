@@ -8,6 +8,6 @@ COPY server.json /etc/server.json
 COPY cert.crt /etc/cert.crt
 COPY private.key /etc/private.key
 
-ENTRYPOINT ["/usr/bin/tuic-server"]
+ENTRYPOINT ["tuic-server"]
 
-CMD ["tuic-server", "--config", "/etc/server.json"]
+CMD [ "--config", "/etc/server.json"]
