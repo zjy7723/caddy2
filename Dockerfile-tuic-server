@@ -10,4 +10,4 @@ COPY private.key /etc/private.key
 
 ENTRYPOINT ["tuic-server"]
 
-CMD [ "--config", "/etc/server.json"]
+CMD ["server", "--config", "/etc/server.json"]
