@@ -4,9 +4,6 @@ ARG TARGETARCH
 
 COPY tuic-server_${TARGETARCH} /usr/bin/tuic-server
 RUN chmod +x /usr/bin/tuic-server
-COPY server.json /etc/server.json
-COPY cert.crt /etc/cert.crt
-COPY private.key /etc/private.key
 
 ENTRYPOINT ["tuic-server"]
 
